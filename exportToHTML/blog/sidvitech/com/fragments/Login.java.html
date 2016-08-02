@@ -1,0 +1,634 @@
+<html>
+<head>
+<title>Login.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(204,120,50); }
+.s1 { color: rgb(169,183,198); }
+.s2 { color: rgb(128,128,128); }
+.s3 { color: rgb(98,151,85); font-style: italic; }
+.s4 { color: rgb(98,151,85); font-weight: bold; font-style: italic; }
+.s5 { color: rgb(106,135,89); }
+.s6 { color: rgb(104,151,187); }
+</style>
+</head>
+<BODY BGCOLOR="#2b2b2b">
+<TABLE CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#C0C0C0" >
+<TR><TD><CENTER>
+<FONT FACE="Arial, Helvetica" COLOR="#000000">
+Login.java</FONT>
+</center></TD></TR></TABLE>
+<pre>
+
+<span class="s0">package </span><span class="s1">blog.sidvitech.com.fragments</span><span class="s0">;</span><span class="s1"> 
+ 
+ 
+</span><span class="s0">import </span><span class="s1">android.annotation.TargetApi</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.app.Activity</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.content.Context</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.content.Intent</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.content.IntentSender</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.os.Build</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.os.Bundle</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.support.design.widget.TextInputLayout</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.support.v4.app.Fragment</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.support.v4.app.FragmentManager</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.support.v4.app.FragmentTransaction</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.text.Editable</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.text.TextWatcher</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.util.Log</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.view.KeyEvent</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.view.LayoutInflater</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.view.MotionEvent</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.view.View</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.view.ViewGroup</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.view.inputmethod.InputMethodManager</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.widget.AutoCompleteTextView</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.widget.Button</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.widget.EditText</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.widget.TextView</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.widget.Toast</span><span class="s0">;</span><span class="s1"> 
+ 
+</span><span class="s0">import </span><span class="s1">com.facebook.AccessToken</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">com.facebook.CallbackManager</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">com.facebook.FacebookCallback</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">com.facebook.FacebookException</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">com.facebook.FacebookSdk</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">com.facebook.GraphRequest</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">com.facebook.GraphResponse</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">com.facebook.Profile</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">com.facebook.ProfileTracker</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">com.facebook.appevents.AppEventsLogger</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">com.facebook.login.LoginManager</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">com.facebook.login.LoginResult</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">com.facebook.login.widget.LoginButton</span><span class="s0">;</span><span class="s1"> 
+ 
+ 
+ 
+</span><span class="s0">import </span><span class="s1">com.google.android.gms.auth.api.Auth</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">com.google.android.gms.auth.api.signin.GoogleSignInAccount</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">com.google.android.gms.auth.api.signin.GoogleSignInOptions</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">com.google.android.gms.auth.api.signin.GoogleSignInResult</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">com.google.android.gms.common.ConnectionResult</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">com.google.android.gms.common.GooglePlayServicesUtil</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">com.google.android.gms.common.SignInButton</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">com.google.android.gms.common.api.GoogleApiClient</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">com.google.android.gms.plus.Plus</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">com.google.android.gms.plus.model.people.Person</span><span class="s0">;</span><span class="s1"> 
+ 
+</span><span class="s0">import </span><span class="s1">org.json.JSONObject</span><span class="s0">;</span><span class="s1"> 
+ 
+</span><span class="s0">import </span><span class="s1">java.net.MalformedURLException</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">java.net.URL</span><span class="s0">;</span><span class="s1"> 
+ 
+</span><span class="s0">import </span><span class="s1">blog.sidvitech.com.activity.R</span><span class="s0">;</span><span class="s1"> 
+ 
+</span><span class="s2">//import com.facebook.FacebookSdk;</span><span class="s1"> 
+</span><span class="s2">//</span><span class="s1"> 
+ 
+</span><span class="s2">//import android.widget.Button;</span><span class="s1"> 
+ 
+ 
+</span><span class="s3">/** 
+ * A simple {</span><span class="s4">@link </span><span class="s3">Fragment} subclass. 
+ */</span><span class="s1"> 
+</span><span class="s0">public class </span><span class="s1">Login </span><span class="s0">extends </span><span class="s1">Fragment </span><span class="s0">implements </span><span class="s1">GoogleApiClient.ConnectionCallbacks</span><span class="s0">, </span><span class="s1">GoogleApiClient.OnConnectionFailedListener { 
+ 
+ 
+    </span><span class="s0">public static final </span><span class="s1">String TAG = </span><span class="s5">&quot;google&quot;</span><span class="s0">;</span><span class="s1"> 
+    </span><span class="s0">public static final int </span><span class="s1">RC_SIGN_IN = </span><span class="s6">0</span><span class="s0">;</span><span class="s1"> 
+    </span><span class="s0">private </span><span class="s1">Context mContext</span><span class="s0">;</span><span class="s1"> 
+    </span><span class="s0">private </span><span class="s1">Activity mActivity</span><span class="s0">;</span><span class="s1"> 
+    SignInButton signInButton</span><span class="s0">;</span><span class="s1"> 
+    </span><span class="s0">private boolean </span><span class="s1">mSignInClicked</span><span class="s0">;</span><span class="s1"> 
+    </span><span class="s0">private boolean </span><span class="s1">mIntentInProgress</span><span class="s0">;</span><span class="s1"> 
+    </span><span class="s0">private </span><span class="s1">ConnectionResult mConnectionResult</span><span class="s0">;</span><span class="s1"> 
+    </span><span class="s0">private </span><span class="s1">GoogleApiClient mGoogleApiClient</span><span class="s0">;</span><span class="s1"> 
+    </span><span class="s0">private </span><span class="s1">LoginButton loginButton</span><span class="s0">;</span><span class="s1"> 
+    </span><span class="s0">private </span><span class="s1">CallbackManager callbackManager</span><span class="s0">;</span><span class="s1"> 
+    </span><span class="s0">private </span><span class="s1">AccessToken accessToken</span><span class="s0">;</span><span class="s1"> 
+    </span><span class="s0">private </span><span class="s1">ProfileTracker profileTracker</span><span class="s0">;</span><span class="s1"> 
+     AutoCompleteTextView uname</span><span class="s0">;</span><span class="s1"> 
+    EditText password</span><span class="s0">;</span><span class="s1"> 
+    Button login</span><span class="s0">, </span><span class="s1">glogin</span><span class="s0">;</span><span class="s1"> 
+    TextInputLayout textInputLayout</span><span class="s0">, </span><span class="s1">til</span><span class="s0">;</span><span class="s1"> 
+    View view</span><span class="s0">;</span><span class="s1"> 
+    </span><span class="s0">public static </span><span class="s1">Button btnlogin</span><span class="s0">;</span><span class="s1"> 
+    TextView tvlink</span><span class="s0">, </span><span class="s1">tvlinksignup</span><span class="s0">;</span><span class="s1"> 
+    Fragment f</span><span class="s0">;</span><span class="s1"> 
+ 
+    </span><span class="s2">//  create a textWatcher member for disable and enabel the button</span><span class="s1"> 
+    </span><span class="s0">public </span><span class="s1">TextWatcher mTextWatcher = </span><span class="s0">new </span><span class="s1">TextWatcher() { 
+        @Override 
+        </span><span class="s0">public void </span><span class="s1">beforeTextChanged(CharSequence charSequence</span><span class="s0">, int </span><span class="s1">i</span><span class="s0">, int </span><span class="s1">i2</span><span class="s0">, int </span><span class="s1">i3) { 
+        } 
+ 
+        @Override 
+        </span><span class="s0">public void </span><span class="s1">onTextChanged(CharSequence charSequence</span><span class="s0">, int </span><span class="s1">i</span><span class="s0">, int </span><span class="s1">i2</span><span class="s0">, int </span><span class="s1">i3) { 
+        } 
+ 
+        @Override 
+        </span><span class="s0">public void </span><span class="s1">afterTextChanged(Editable editable) { 
+            </span><span class="s2">// check Fields For Empty Values</span><span class="s1"> 
+ 
+            checkFieldsForEmptyValues()</span><span class="s0">;</span><span class="s1"> 
+        } 
+    }</span><span class="s0">;</span><span class="s1"> 
+ 
+    </span><span class="s2">//  create a textWatcher member for disable and enabel the button</span><span class="s1"> 
+    </span><span class="s0">private </span><span class="s1">TextWatcher pTextWatcher = </span><span class="s0">new </span><span class="s1">TextWatcher() { 
+        @Override 
+        </span><span class="s0">public void </span><span class="s1">beforeTextChanged(CharSequence charSequence</span><span class="s0">, int </span><span class="s1">i</span><span class="s0">, int </span><span class="s1">i2</span><span class="s0">, int </span><span class="s1">i3) { 
+        } 
+ 
+        @Override 
+        </span><span class="s0">public void </span><span class="s1">onTextChanged(CharSequence charSequence</span><span class="s0">, int </span><span class="s1">i</span><span class="s0">, int </span><span class="s1">i2</span><span class="s0">, int </span><span class="s1">i3) { 
+ 
+        } 
+ 
+        @Override 
+        </span><span class="s0">public void </span><span class="s1">afterTextChanged(Editable editable) { 
+            </span><span class="s2">// check Fields For Empty Value</span><span class="s1"> 
+</span><span class="s2">//            if (!(password.getText().toString().length()&gt;6)) {</span><span class="s1"> 
+</span><span class="s2">//                til.setError(null);</span><span class="s1"> 
+</span><span class="s2">//            }</span><span class="s1"> 
+            checkFieldsForEmptyValues()</span><span class="s0">;</span><span class="s1"> 
+        } 
+    }</span><span class="s0">;</span><span class="s1"> 
+ 
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN) 
+    </span><span class="s0">public void </span><span class="s1">checkFieldsForEmptyValues() { 
+        Button b = btnlogin</span><span class="s0">;</span><span class="s1"> 
+ 
+        String s1 = uname.getText().toString()</span><span class="s0">;</span><span class="s1"> 
+        String s2 = password.getText().toString()</span><span class="s0">;</span><span class="s1"> 
+ 
+        </span><span class="s0">if </span><span class="s1">(s1.contains(</span><span class="s5">&quot;@&quot;</span><span class="s1">) &amp;&amp; s2.length() &gt; </span><span class="s6">6</span><span class="s1">) { 
+            b.setEnabled(</span><span class="s0">true</span><span class="s1">)</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s2">//            b.setBackground(getResources().getDrawable(R.drawable.shape));</span><span class="s1"> 
+        } </span><span class="s0">else </span><span class="s1">{ 
+            b.setEnabled(</span><span class="s0">false</span><span class="s1">)</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s2">//            b.setBackground(getResources().getDrawable(R.drawable.disableshape));</span><span class="s1"> 
+        } 
+    } 
+    </span><span class="s0">public </span><span class="s1">Login() { 
+ 
+        </span><span class="s2">// Required empty public constructor</span><span class="s1"> 
+ 
+    } 
+ 
+    @Override 
+    </span><span class="s0">public void </span><span class="s1">onCreate(Bundle savedInstanceState) { 
+        </span><span class="s0">super</span><span class="s1">.onCreate(savedInstanceState)</span><span class="s0">;</span><span class="s1"> 
+        mActivity = getActivity()</span><span class="s0">;</span><span class="s1"> 
+        mContext = getActivity().getApplicationContext()</span><span class="s0">;</span><span class="s1"> 
+ 
+           FacebookSdk.sdkInitialize(mContext)</span><span class="s0">;</span><span class="s1"> 
+            callbackManager = CallbackManager.Factory.create()</span><span class="s0">;</span><span class="s1"> 
+        AppEventsLogger.activateApp(mActivity)</span><span class="s0">;</span><span class="s1"> 
+ 
+        accessToken = AccessToken.getCurrentAccessToken()</span><span class="s0">;</span><span class="s1"> 
+ 
+        LoginManager.getInstance().registerCallback(callbackManager</span><span class="s0">, new </span><span class="s1">FacebookCallback&lt;LoginResult&gt;() { 
+            @Override 
+            </span><span class="s0">public void </span><span class="s1">onSuccess(LoginResult loginResult) { 
+ 
+            } 
+ 
+            @Override 
+            </span><span class="s0">public void </span><span class="s1">onCancel() { 
+ 
+            } 
+ 
+            @Override 
+            </span><span class="s0">public void </span><span class="s1">onError(FacebookException error) { 
+ 
+            } 
+        })</span><span class="s0">;</span><span class="s1"> 
+    } 
+ 
+ 
+    @Override 
+    </span><span class="s0">public </span><span class="s1">View onCreateView(LayoutInflater inflater</span><span class="s0">, </span><span class="s1">ViewGroup container</span><span class="s0">, </span><span class="s1">Bundle savedInstanceState) { 
+ 
+ 
+        GoogleSignInOptions googleSignInOptions = </span><span class="s0">new </span><span class="s1">GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN) 
+                .requestEmail() 
+                .build()</span><span class="s0">;</span><span class="s1"> 
+ 
+ 
+        view = inflater.inflate(R.layout.fragment_login</span><span class="s0">, </span><span class="s1">container</span><span class="s0">, false</span><span class="s1">)</span><span class="s0">;</span><span class="s1"> 
+        signInButton = (SignInButton) view.findViewById(R.id.sign_in_button)</span><span class="s0">;</span><span class="s1"> 
+        btnlogin = (Button) view.findViewById(R.id.btnlogin1)</span><span class="s0">;</span><span class="s1"> 
+        tvlink = (TextView) view.findViewById(R.id.tvforgotpassword)</span><span class="s0">;</span><span class="s1"> 
+        tvlinksignup = (TextView) view.findViewById(R.id.signup)</span><span class="s0">;</span><span class="s1"> 
+        uname = (AutoCompleteTextView) view.findViewById(R.id.email)</span><span class="s0">;</span><span class="s1"> 
+        textInputLayout = (TextInputLayout) view.findViewById(R.id.textinputlayout)</span><span class="s0">;</span><span class="s1"> 
+        til = (TextInputLayout) view.findViewById(R.id.textlayout)</span><span class="s0">;</span><span class="s1"> 
+        password = (EditText) view.findViewById(R.id.etpassword)</span><span class="s0">;</span><span class="s1"> 
+        login = (Button) view.findViewById(R.id.fb)</span><span class="s0">;</span><span class="s1"> 
+        glogin = (Button) view.findViewById(R.id.gplus)</span><span class="s0">;</span><span class="s1"> 
+ 
+        view.setOnKeyListener(</span><span class="s0">new </span><span class="s1">View.OnKeyListener() { 
+            @Override 
+            </span><span class="s0">public boolean </span><span class="s1">onKey(View v</span><span class="s0">, int </span><span class="s1">keyCode</span><span class="s0">, </span><span class="s1">KeyEvent event) { 
+                </span><span class="s0">if </span><span class="s1">(keyCode == KeyEvent.KEYCODE_BACK){ 
+                    </span><span class="s0">return true;</span><span class="s1"> 
+                } 
+                </span><span class="s0">return false;</span><span class="s1"> 
+            } 
+        })</span><span class="s0">;</span><span class="s1"> 
+ 
+ 
+        loginButton = (LoginButton) view.findViewById(R.id.login_button)</span><span class="s0">;</span><span class="s1"> 
+        loginButton.setReadPermissions(</span><span class="s5">&quot;user_friends&quot;</span><span class="s0">, </span><span class="s5">&quot;email&quot;</span><span class="s0">, </span><span class="s5">&quot;user_birthday&quot;</span><span class="s1">)</span><span class="s0">;</span><span class="s1"> 
+        loginButton.setCompoundDrawablesWithIntrinsicBounds(</span><span class="s0">null, null, null, null</span><span class="s1">)</span><span class="s0">;</span><span class="s1"> 
+ 
+        loginButton.setFragment(</span><span class="s0">this</span><span class="s1">)</span><span class="s0">;</span><span class="s1"> 
+ 
+        btnlogin.getBackground().setAlpha(</span><span class="s6">175</span><span class="s1">)</span><span class="s0">;</span><span class="s1"> 
+ 
+        login.setOnClickListener(</span><span class="s0">new </span><span class="s1">View.OnClickListener() { 
+            @Override 
+            </span><span class="s0">public void </span><span class="s1">onClick(View v) { 
+                </span><span class="s0">if </span><span class="s1">(v == login) { 
+                    loginButton.performClick()</span><span class="s0">;</span><span class="s1"> 
+                } 
+            } 
+        })</span><span class="s0">;</span><span class="s1"> 
+ 
+        loginButton.registerCallback(callbackManager</span><span class="s0">, new </span><span class="s1">FacebookCallback&lt;LoginResult&gt;() { 
+            @Override 
+            </span><span class="s0">public void </span><span class="s1">onSuccess(LoginResult loginResult) { 
+ 
+                System.out.println(</span><span class="s5">&quot;OnSucess Method&quot;</span><span class="s1">)</span><span class="s0">;</span><span class="s1"> 
+ 
+                String accestoken = loginResult.getAccessToken().getToken()</span><span class="s0">;</span><span class="s1"> 
+                Log.i(</span><span class="s5">&quot;acessToken&quot;</span><span class="s0">, </span><span class="s1">accestoken)</span><span class="s0">;</span><span class="s1"> 
+ 
+                GraphRequest graphRequest = GraphRequest.newMeRequest(loginResult.getAccessToken()</span><span class="s0">, new </span><span class="s1">GraphRequest.GraphJSONObjectCallback() { 
+                    @Override 
+                    </span><span class="s0">public void </span><span class="s1">onCompleted(JSONObject object</span><span class="s0">, </span><span class="s1">GraphResponse response) { 
+                        Log.i(</span><span class="s5">&quot;LogInActivity&quot;</span><span class="s0">,</span><span class="s1">response.toString())</span><span class="s0">;</span><span class="s1"> 
+                        Bundle getData = getFacebookData(object)</span><span class="s0">;</span><span class="s1"> 
+ 
+                    } 
+                })</span><span class="s0">;</span><span class="s1"> 
+ 
+ 
+            Bundle parameters = </span><span class="s0">new </span><span class="s1">Bundle()</span><span class="s0">;</span><span class="s1"> 
+                parameters.putString(</span><span class="s5">&quot;fields&quot;</span><span class="s0">,</span><span class="s5">&quot;id,name,email&quot;</span><span class="s1">)</span><span class="s0">;</span><span class="s1"> 
+                graphRequest.setParameters(parameters)</span><span class="s0">;</span><span class="s1"> 
+                graphRequest.executeAsync()</span><span class="s0">;</span><span class="s1"> 
+ 
+                Profile profile = Profile.getCurrentProfile()</span><span class="s0">;</span><span class="s1"> 
+ 
+                </span><span class="s0">try</span><span class="s1">{ 
+                    Toast.makeText(getContext()</span><span class="s0">,</span><span class="s5">&quot;Log In as &quot;</span><span class="s1">+profile.getFirstName()+profile.getLastName()</span><span class="s0">,</span><span class="s1">Toast.LENGTH_LONG).show()</span><span class="s0">;</span><span class="s1"> 
+                }</span><span class="s0">catch </span><span class="s1">(Exception e){ 
+                    Toast.makeText(getContext()</span><span class="s0">,</span><span class="s5">&quot;Error to log in&quot;</span><span class="s0">,</span><span class="s1">Toast.LENGTH_LONG).show()</span><span class="s0">;</span><span class="s1"> 
+                } 
+ 
+            } 
+ 
+            @Override 
+            </span><span class="s0">public void </span><span class="s1">onCancel() { 
+                Toast.makeText(getContext()</span><span class="s0">,</span><span class="s5">&quot;LogIn Cancel&quot;</span><span class="s0">,</span><span class="s1">Toast.LENGTH_LONG).show()</span><span class="s0">;</span><span class="s1"> 
+            } 
+ 
+            @Override 
+            </span><span class="s0">public void </span><span class="s1">onError(FacebookException error) { 
+                Toast.makeText(getContext()</span><span class="s0">,</span><span class="s5">&quot;Failed to log in&quot;</span><span class="s0">,</span><span class="s1">Toast.LENGTH_LONG).show()</span><span class="s0">;</span><span class="s1"> 
+            } 
+ 
+        })</span><span class="s0">;</span><span class="s1"> 
+ 
+        mGoogleApiClient = </span><span class="s0">new </span><span class="s1">GoogleApiClient.Builder(view.getContext()) 
+                .addConnectionCallbacks(</span><span class="s0">this</span><span class="s1">) 
+                .addOnConnectionFailedListener(</span><span class="s0">this</span><span class="s1">) 
+                .addApi(Auth.GOOGLE_SIGN_IN_API</span><span class="s0">, </span><span class="s1">googleSignInOptions) 
+                .addApi(Plus.API) 
+                .build()</span><span class="s0">;</span><span class="s1"> 
+ 
+</span><span class="s2">//                .enableAutoManage(this /* FragmentActivity */, this /* OnConnectionFailedListener */)</span><span class="s1"> 
+ 
+ 
+ 
+        </span><span class="s2">//SetSignInButton Size</span><span class="s1"> 
+        signInButton.setSize(SignInButton.SIZE_WIDE)</span><span class="s0">;</span><span class="s1"> 
+        signInButton.setScopes(googleSignInOptions.getScopeArray())</span><span class="s0">;</span><span class="s1"> 
+ 
+ 
+        glogin.setOnClickListener(</span><span class="s0">new </span><span class="s1">View.OnClickListener() { 
+            @Override 
+            </span><span class="s0">public void </span><span class="s1">onClick(View v) { 
+ 
+</span><span class="s2">//                glogin.post(new Runnable() {</span><span class="s1"> 
+</span><span class="s2">//                    @Override</span><span class="s1"> 
+</span><span class="s2">//                    public void run() {</span><span class="s1"> 
+</span><span class="s2">//                        signInButton.performClick();</span><span class="s1"> 
+</span><span class="s2">//                    }</span><span class="s1"> 
+</span><span class="s2">//                });</span><span class="s1"> 
+ 
+                signInWithGplus()</span><span class="s0">;</span><span class="s1"> 
+            } 
+        })</span><span class="s0">;</span><span class="s1"> 
+ 
+        </span><span class="s2">// set listeners</span><span class="s1"> 
+        uname.addTextChangedListener(mTextWatcher)</span><span class="s0">;</span><span class="s1"> 
+        password.addTextChangedListener(pTextWatcher)</span><span class="s0">;</span><span class="s1"> 
+ 
+        signInButton.setOnClickListener(</span><span class="s0">new </span><span class="s1">View.OnClickListener() { 
+            @Override 
+            </span><span class="s0">public void </span><span class="s1">onClick(View v) { 
+                signInWithGplus()</span><span class="s0">;</span><span class="s1"> 
+            } 
+        })</span><span class="s0">;</span><span class="s1"> 
+ 
+        </span><span class="s2">// run once to disable if empty</span><span class="s1"> 
+        checkFieldsForEmptyValues()</span><span class="s0">;</span><span class="s1"> 
+ 
+        textInputLayout.setErrorEnabled(</span><span class="s0">false</span><span class="s1">)</span><span class="s0">;</span><span class="s1"> 
+        til.setErrorEnabled(</span><span class="s0">false</span><span class="s1">)</span><span class="s0">;</span><span class="s1"> 
+        setupUI(view.findViewById(R.id.loginactivity))</span><span class="s0">;</span><span class="s1"> 
+ 
+</span><span class="s2">//        uname.setOnFocusChangeListener(new View.OnFocusChangeListener() {</span><span class="s1"> 
+</span><span class="s2">//            @Override</span><span class="s1"> 
+</span><span class="s2">//            public void onFocusChange(View v, boolean hasFocus) {</span><span class="s1"> 
+</span><span class="s2">//                if (uname.getText().toString().equals(&quot;&quot;)) {</span><span class="s1"> 
+</span><span class="s2">//                    textInputLayout.setError(getString(R.string.error_field_required));</span><span class="s1"> 
+</span><span class="s2">//                }else if (!(uname.getText().toString().contains(&quot;@&quot;))){</span><span class="s1"> 
+</span><span class="s2">//                    textInputLayout.setError(getString(R.string.error_invalid_email));</span><span class="s1"> 
+</span><span class="s2">//                }else{</span><span class="s1"> 
+</span><span class="s2">//                    textInputLayout.setError(null);</span><span class="s1"> 
+</span><span class="s2">//                }</span><span class="s1"> 
+</span><span class="s2">//            }</span><span class="s1"> 
+</span><span class="s2">//        });</span><span class="s1"> 
+</span><span class="s2">//        password.setOnFocusChangeListener(new View.OnFocusChangeListener() {</span><span class="s1"> 
+</span><span class="s2">//            @Override</span><span class="s1"> 
+</span><span class="s2">//            public void onFocusChange(View v, boolean hasFocus) {</span><span class="s1"> 
+</span><span class="s2">//</span><span class="s1"> 
+</span><span class="s2">//                if (password.getText().toString().equals(&quot;&quot;)){</span><span class="s1"> 
+</span><span class="s2">//                    til.setError(getString(R.string.error_field_required));</span><span class="s1"> 
+</span><span class="s2">//                }else if (password.getText().toString().length()&lt;6) {</span><span class="s1"> 
+</span><span class="s2">//                    til.setError(getString(R.string.error_invalid_password));</span><span class="s1"> 
+</span><span class="s2">//                } else {</span><span class="s1"> 
+</span><span class="s2">//                    til.setError(null);</span><span class="s1"> 
+</span><span class="s2">//                }</span><span class="s1"> 
+</span><span class="s2">//            }</span><span class="s1"> 
+</span><span class="s2">//        });</span><span class="s1"> 
+ 
+</span><span class="s2">//        Drawable drawable = tvlink.getBackground(); // get current EditText drawable</span><span class="s1"> 
+</span><span class="s2">//        if(isValidEmail(uname.getText())) {</span><span class="s1"> 
+</span><span class="s2">//            uname.setError(Html.fromHtml(&quot;&lt;font color='blue'&gt;this is the error&lt;/font&gt;&quot;));</span><span class="s1"> 
+</span><span class="s2">//        }else {</span><span class="s1"> 
+</span><span class="s2">//</span><span class="s1"> 
+</span><span class="s2">//            uname.setError(Html.fromHtml(&quot;&lt;font color='blue'&gt;this is the error&lt;/font&gt;&quot;));</span><span class="s1"> 
+</span><span class="s2">//        }</span><span class="s1"> 
+ 
+ 
+        btnlogin.setOnClickListener(</span><span class="s0">new </span><span class="s1">View.OnClickListener() { 
+            @Override 
+            </span><span class="s0">public void </span><span class="s1">onClick(View v) { 
+ 
+</span><span class="s2">//                attemptlog();</span><span class="s1"> 
+            } 
+        })</span><span class="s0">;</span><span class="s1"> 
+ 
+        tvlink.setOnClickListener(</span><span class="s0">new </span><span class="s1">View.OnClickListener() { 
+            @Override 
+            </span><span class="s0">public void </span><span class="s1">onClick(View v) { 
+                f = </span><span class="s0">new </span><span class="s1">forgotPassword()</span><span class="s0">;</span><span class="s1"> 
+                setFragment(f)</span><span class="s0">;</span><span class="s1"> 
+            } 
+        })</span><span class="s0">;</span><span class="s1"> 
+ 
+        tvlinksignup.setOnClickListener(</span><span class="s0">new </span><span class="s1">View.OnClickListener() { 
+            @Override 
+            </span><span class="s0">public void </span><span class="s1">onClick(View v) { 
+                f = </span><span class="s0">new </span><span class="s1">signup()</span><span class="s0">;</span><span class="s1"> 
+                setFragment(f)</span><span class="s0">;</span><span class="s1"> 
+            } 
+        })</span><span class="s0">;</span><span class="s1"> 
+ 
+        </span><span class="s0">return </span><span class="s1">view</span><span class="s0">;</span><span class="s1"> 
+    } 
+ 
+    </span><span class="s0">private </span><span class="s1">Bundle getFacebookData(JSONObject object) { 
+ 
+ 
+        </span><span class="s0">try </span><span class="s1">{ 
+            Bundle bundle = </span><span class="s0">new </span><span class="s1">Bundle()</span><span class="s0">;</span><span class="s1"> 
+            String id = object.getString(</span><span class="s5">&quot;id&quot;</span><span class="s1">)</span><span class="s0">;</span><span class="s1"> 
+ 
+            </span><span class="s0">if </span><span class="s1">(object.getString(</span><span class="s5">&quot;email&quot;</span><span class="s1">)==</span><span class="s0">null</span><span class="s1">) 
+                Toast.makeText(getContext()</span><span class="s0">,</span><span class="s5">&quot;Email not available&quot;</span><span class="s0">,</span><span class="s1">Toast.LENGTH_LONG).show()</span><span class="s0">;</span><span class="s1"> 
+            </span><span class="s0">else </span><span class="s1">{ 
+                Toast.makeText(getContext()</span><span class="s0">, </span><span class="s5">&quot;Email available&quot;</span><span class="s0">, </span><span class="s1">Toast.LENGTH_LONG).show()</span><span class="s0">;</span><span class="s1"> 
+            } 
+            </span><span class="s0">try </span><span class="s1">{ 
+                URL profile_pic = </span><span class="s0">new </span><span class="s1">URL(</span><span class="s5">&quot;https://graph.facebook.com/&quot; </span><span class="s1">+ id + </span><span class="s5">&quot;/picture?width=200&amp;height=150&quot;</span><span class="s1">)</span><span class="s0">;</span><span class="s1"> 
+                Log.i(</span><span class="s5">&quot;profile_pic&quot;</span><span class="s0">, </span><span class="s1">profile_pic + </span><span class="s5">&quot;&quot;</span><span class="s1">)</span><span class="s0">;</span><span class="s1"> 
+                bundle.putString(</span><span class="s5">&quot;profile_pic&quot;</span><span class="s0">, </span><span class="s1">profile_pic.toString())</span><span class="s0">;</span><span class="s1"> 
+ 
+            } </span><span class="s0">catch </span><span class="s1">(MalformedURLException e) { 
+                e.printStackTrace()</span><span class="s0">;</span><span class="s1"> 
+                </span><span class="s0">return null;</span><span class="s1"> 
+            } 
+ 
+            bundle.putString(</span><span class="s5">&quot;idFacebook&quot;</span><span class="s0">, </span><span class="s1">id)</span><span class="s0">;</span><span class="s1"> 
+            </span><span class="s0">if </span><span class="s1">(object.has(</span><span class="s5">&quot;first_name&quot;</span><span class="s1">)) 
+                bundle.putString(</span><span class="s5">&quot;first_name&quot;</span><span class="s0">, </span><span class="s1">object.getString(</span><span class="s5">&quot;first_name&quot;</span><span class="s1">))</span><span class="s0">;</span><span class="s1"> 
+            </span><span class="s0">if </span><span class="s1">(object.has(</span><span class="s5">&quot;last_name&quot;</span><span class="s1">)) 
+                bundle.putString(</span><span class="s5">&quot;last_name&quot;</span><span class="s0">, </span><span class="s1">object.getString(</span><span class="s5">&quot;last_name&quot;</span><span class="s1">))</span><span class="s0">;</span><span class="s1"> 
+            </span><span class="s0">if </span><span class="s1">(object.has(</span><span class="s5">&quot;email&quot;</span><span class="s1">)) 
+                bundle.putString(</span><span class="s5">&quot;email&quot;</span><span class="s0">, </span><span class="s1">object.getString(</span><span class="s5">&quot;email&quot;</span><span class="s1">))</span><span class="s0">;</span><span class="s1"> 
+            </span><span class="s0">if </span><span class="s1">(object.has(</span><span class="s5">&quot;gender&quot;</span><span class="s1">)) 
+                bundle.putString(</span><span class="s5">&quot;gender&quot;</span><span class="s0">, </span><span class="s1">object.getString(</span><span class="s5">&quot;gender&quot;</span><span class="s1">))</span><span class="s0">;</span><span class="s1"> 
+            </span><span class="s0">if </span><span class="s1">(object.has(</span><span class="s5">&quot;birthday&quot;</span><span class="s1">)) 
+                bundle.putString(</span><span class="s5">&quot;birthday&quot;</span><span class="s0">, </span><span class="s1">object.getString(</span><span class="s5">&quot;birthday&quot;</span><span class="s1">))</span><span class="s0">;</span><span class="s1"> 
+            </span><span class="s0">if </span><span class="s1">(object.has(</span><span class="s5">&quot;location&quot;</span><span class="s1">)) 
+                bundle.putString(</span><span class="s5">&quot;location&quot;</span><span class="s0">, </span><span class="s1">object.getJSONObject(</span><span class="s5">&quot;location&quot;</span><span class="s1">).getString(</span><span class="s5">&quot;name&quot;</span><span class="s1">))</span><span class="s0">;</span><span class="s1"> 
+ 
+            </span><span class="s0">return </span><span class="s1">bundle</span><span class="s0">;</span><span class="s1"> 
+ 
+        }</span><span class="s0">catch </span><span class="s1">(Exception e) 
+        { e.printStackTrace()</span><span class="s0">; </span><span class="s1">} 
+        </span><span class="s0">return null;</span><span class="s1"> 
+    } 
+ 
+    </span><span class="s0">public void </span><span class="s1">setFragment(Fragment f) { 
+        FragmentManager fm = getActivity().getSupportFragmentManager()</span><span class="s0">;</span><span class="s1"> 
+        FragmentTransaction ft = fm.beginTransaction()</span><span class="s0">;</span><span class="s1"> 
+        ft.replace(R.id.flfrholder</span><span class="s0">, </span><span class="s1">f)</span><span class="s0">;</span><span class="s1"> 
+        ft.addToBackStack(</span><span class="s0">null</span><span class="s1">)</span><span class="s0">;</span><span class="s1"> 
+        ft.commit()</span><span class="s0">;</span><span class="s1"> 
+    } 
+ 
+ 
+    </span><span class="s0">private boolean </span><span class="s1">isEmailValid(String email) { 
+        </span><span class="s2">//TODO: Replace this with your own logic</span><span class="s1"> 
+        </span><span class="s0">return </span><span class="s1">email.contains(</span><span class="s5">&quot;@&quot;</span><span class="s1">)</span><span class="s0">;</span><span class="s1"> 
+    } 
+ 
+    </span><span class="s0">public boolean </span><span class="s1">isValidEmail(CharSequence target) { 
+        </span><span class="s0">if </span><span class="s1">(target == </span><span class="s0">null</span><span class="s1">) { 
+            </span><span class="s0">return false;</span><span class="s1"> 
+        } </span><span class="s0">else </span><span class="s1">{ 
+            </span><span class="s0">return </span><span class="s1">android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches()</span><span class="s0">;</span><span class="s1"> 
+        } 
+    } 
+ 
+    </span><span class="s0">public void </span><span class="s1">setupUI(View view) { 
+ 
+        </span><span class="s2">//Set up touch listener for non-text box views to hide keyboard.</span><span class="s1"> 
+        </span><span class="s0">if </span><span class="s1">(!(view </span><span class="s0">instanceof </span><span class="s1">EditText)) { 
+ 
+            view.setOnTouchListener(</span><span class="s0">new </span><span class="s1">View.OnTouchListener() { 
+ 
+                </span><span class="s0">public boolean </span><span class="s1">onTouch(View v</span><span class="s0">, </span><span class="s1">MotionEvent event) { 
+                    hideSoftKeyboard(getActivity())</span><span class="s0">;</span><span class="s1"> 
+                    </span><span class="s0">return false;</span><span class="s1"> 
+                } 
+ 
+            })</span><span class="s0">;</span><span class="s1"> 
+        } 
+ 
+        </span><span class="s2">//If a layout container, iterate over children and seed recursion.</span><span class="s1"> 
+        </span><span class="s0">if </span><span class="s1">(view </span><span class="s0">instanceof </span><span class="s1">ViewGroup) { 
+ 
+            </span><span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">i = </span><span class="s6">0</span><span class="s0">; </span><span class="s1">i &lt; ((ViewGroup) view).getChildCount()</span><span class="s0">; </span><span class="s1">i++) { 
+ 
+                View innerView = ((ViewGroup) view).getChildAt(i)</span><span class="s0">;</span><span class="s1"> 
+ 
+                setupUI(innerView)</span><span class="s0">;</span><span class="s1"> 
+            } 
+        } 
+    } 
+ 
+    </span><span class="s0">public static void </span><span class="s1">hideSoftKeyboard(Activity activity) { 
+        InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE)</span><span class="s0">;</span><span class="s1"> 
+        </span><span class="s0">if </span><span class="s1">(activity.getCurrentFocus() != </span><span class="s0">null</span><span class="s1">) 
+            inputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken()</span><span class="s0">, </span><span class="s6">0</span><span class="s1">)</span><span class="s0">;</span><span class="s1"> 
+    } 
+ 
+    @Override 
+    </span><span class="s0">public void </span><span class="s1">onActivityResult(</span><span class="s0">int </span><span class="s1">requestCode</span><span class="s0">, int </span><span class="s1">responseCode</span><span class="s0">,</span><span class="s1"> 
+                                 Intent data) { 
+        </span><span class="s0">super</span><span class="s1">.onActivityResult(requestCode</span><span class="s0">,</span><span class="s1">responseCode</span><span class="s0">,</span><span class="s1">data)</span><span class="s0">;</span><span class="s1"> 
+ 
+        callbackManager.onActivityResult(requestCode</span><span class="s0">, </span><span class="s1">responseCode</span><span class="s0">, </span><span class="s1">data)</span><span class="s0">;</span><span class="s1"> 
+ 
+        </span><span class="s0">if </span><span class="s1">(requestCode == RC_SIGN_IN) { 
+                GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data)</span><span class="s0">;</span><span class="s1"> 
+                handleSignInResult(result)</span><span class="s0">;</span><span class="s1"> 
+ 
+            </span><span class="s0">if </span><span class="s1">(responseCode != Activity.RESULT_OK) { 
+                mSignInClicked = </span><span class="s0">false;</span><span class="s1"> 
+            } 
+ 
+            mIntentInProgress = </span><span class="s0">false;</span><span class="s1"> 
+ 
+            </span><span class="s0">if </span><span class="s1">(!mGoogleApiClient.isConnecting()) { 
+                mGoogleApiClient.connect(GoogleApiClient.SIGN_IN_MODE_OPTIONAL)</span><span class="s0">;</span><span class="s1"> 
+            } 
+        } 
+    } 
+ 
+    @Override 
+    </span><span class="s0">public void </span><span class="s1">onConnected(Bundle bundle) { 
+ 
+        </span><span class="s0">try </span><span class="s1">{ 
+            </span><span class="s0">if </span><span class="s1">(Plus.PeopleApi.getCurrentPerson(mGoogleApiClient) != </span><span class="s0">null</span><span class="s1">) { 
+                Person currentPerson = Plus.PeopleApi 
+                        .getCurrentPerson(mGoogleApiClient)</span><span class="s0">;</span><span class="s1"> 
+                String personName = currentPerson.getDisplayName()</span><span class="s0">;</span><span class="s1"> 
+                String personPhotoUrl = currentPerson.getImage().getUrl()</span><span class="s0">;</span><span class="s1"> 
+                String personGooglePlusProfile = currentPerson.getUrl()</span><span class="s0">;</span><span class="s1"> 
+                String email = Plus.AccountApi.getAccountName(mGoogleApiClient)</span><span class="s0">;</span><span class="s1"> 
+ 
+                Log.e(TAG</span><span class="s0">, </span><span class="s5">&quot;Name: &quot; </span><span class="s1">+ personName + </span><span class="s5">&quot;, plusProfile: &quot;</span><span class="s1"> 
+                        + personGooglePlusProfile + </span><span class="s5">&quot;, email: &quot; </span><span class="s1">+ email 
+                        + </span><span class="s5">&quot;, Image: &quot; </span><span class="s1">+ personPhotoUrl + </span><span class="s5">&quot; user id:&quot;</span><span class="s1"> 
+                        + currentPerson.getId())</span><span class="s0">;</span><span class="s1"> 
+ 
+            } </span><span class="s0">else </span><span class="s1">{ 
+                Toast.makeText(mContext</span><span class="s0">, </span><span class="s5">&quot;Person information is null&quot;</span><span class="s0">,</span><span class="s1"> 
+                        Toast.LENGTH_LONG).show()</span><span class="s0">;</span><span class="s1"> 
+            } 
+        } </span><span class="s0">catch </span><span class="s1">(Exception e) { 
+            e.printStackTrace()</span><span class="s0">;</span><span class="s1"> 
+        } 
+ 
+    } 
+ 
+    @Override 
+    </span><span class="s0">public void </span><span class="s1">onConnectionSuspended(</span><span class="s0">int </span><span class="s1">i) { 
+        mGoogleApiClient.connect()</span><span class="s0">;</span><span class="s1"> 
+    } 
+ 
+    @Override 
+    </span><span class="s0">public void </span><span class="s1">onConnectionFailed(ConnectionResult result) { 
+ 
+        </span><span class="s0">if </span><span class="s1">(!result.hasResolution()) { 
+            GooglePlayServicesUtil.getErrorDialog(result.getErrorCode()</span><span class="s0">,</span><span class="s1"> 
+                    mActivity</span><span class="s0">, </span><span class="s6">0</span><span class="s1">).show()</span><span class="s0">;</span><span class="s1"> 
+            Log.e(TAG</span><span class="s0">, </span><span class="s5">&quot;&quot; </span><span class="s1">+ result.getErrorCode())</span><span class="s0">;</span><span class="s1"> 
+            </span><span class="s0">return;</span><span class="s1"> 
+        } 
+ 
+        </span><span class="s0">if </span><span class="s1">(!mIntentInProgress) { 
+ 
+            mConnectionResult = result</span><span class="s0">;</span><span class="s1"> 
+ 
+            </span><span class="s0">if </span><span class="s1">(mSignInClicked) { 
+ 
+                Log.e(TAG</span><span class="s0">, </span><span class="s5">&quot;&quot; </span><span class="s1">+ result.getErrorCode())</span><span class="s0">;</span><span class="s1"> 
+                resolveSignInError()</span><span class="s0">;</span><span class="s1"> 
+            } 
+        } 
+    } 
+ 
+    </span><span class="s3">/** 
+     * Sign-in into google 
+     */</span><span class="s1"> 
+    </span><span class="s0">private void </span><span class="s1">signInWithGplus() { 
+        </span><span class="s0">if </span><span class="s1">(!mGoogleApiClient.isConnecting()) { 
+            mSignInClicked = </span><span class="s0">true;</span><span class="s1"> 
+</span><span class="s2">//            resolveSignInError();</span><span class="s1"> 
+            Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient)</span><span class="s0">;</span><span class="s1"> 
+            startActivityForResult(signInIntent</span><span class="s0">, </span><span class="s1">RC_SIGN_IN)</span><span class="s0">;</span><span class="s1"> 
+        } 
+    } 
+ 
+    </span><span class="s0">private void </span><span class="s1">resolveSignInError() { 
+        </span><span class="s0">if </span><span class="s1">(mConnectionResult.hasResolution()) { 
+            </span><span class="s0">try </span><span class="s1">{ 
+                mIntentInProgress = </span><span class="s0">true;</span><span class="s1"> 
+                mConnectionResult.startResolutionForResult(mActivity</span><span class="s0">,</span><span class="s1"> 
+                        RC_SIGN_IN)</span><span class="s0">;</span><span class="s1"> 
+            } </span><span class="s0">catch </span><span class="s1">(IntentSender.SendIntentException e) { 
+                mIntentInProgress = </span><span class="s0">false;</span><span class="s1"> 
+                mGoogleApiClient.connect()</span><span class="s0">;</span><span class="s1"> 
+            } 
+        } 
+ 
+    } 
+ 
+    </span><span class="s0">private void </span><span class="s1">handleSignInResult(GoogleSignInResult result) { 
+        Log.d(TAG</span><span class="s0">, </span><span class="s5">&quot;handleSignInResult:&quot; </span><span class="s1">+ result.isSuccess())</span><span class="s0">;</span><span class="s1"> 
+        </span><span class="s0">if </span><span class="s1">(result.isSuccess()) { 
+            </span><span class="s2">// Signed in successfully, show authenticated UI.</span><span class="s1"> 
+            GoogleSignInAccount acct = result.getSignInAccount()</span><span class="s0">;</span><span class="s1"> 
+            System.out.println(</span><span class="s5">&quot;Sign in : &quot; </span><span class="s1">+ acct.getDisplayName())</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s2">//            mStatusTextView.setText(getString(R.string.signed_in_fmt, acct.getDisplayName()));</span><span class="s1"> 
+ 
+        } </span><span class="s0">else </span><span class="s1">{ 
+            </span><span class="s2">// Signed out, show unauthenticated UI.</span><span class="s1"> 
+        } 
+    } 
+} 
+</span></pre>
+</body>
+</html>

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "362109904053",
+    "project_id": "firebase-blog-master"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:362109904053:android:b032f7ca9efa436e",
+        "android_client_info": {
+          "package_name": "blog.sidvitech.com.activity"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "362109904053-hj4ced36nvjivu86mssp46a3ic4e3gd4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "blog.sidvitech.com.activity",
+            "certificate_hash": "B52D57066BCC625F8AAC94E14031BE9E21D52A33"
+          }
+        },
+        {
+          "client_id": "362109904053-dcti15a9ev1pf6rpf56op80dipsoepmb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDIbXKnjIGhNl6rsqNK8iUp7N8wREhMF1w"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

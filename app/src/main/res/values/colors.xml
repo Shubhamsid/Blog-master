@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#2a2c2f</color>
+    <color name="blackcolor">#000000</color>
+    <color name="white">#ffffff</color>
+    <color name="background_material_light">#fffff6</color>
+    <color name="primary">#fffff5</color>
+    <color name="primary_dark">#009688</color>
+    <color name="accent">#FFFFFF</color>
+    <color name="transp_black">#80000000</color>
+
+    <color name="black">#000000</color>
+    <color name="jet">#222222</color>
+    <color name="oil">#333333</color>
+    <color name="monsoon">#777777</color>
+    <color name="jumbo">#888888</color>
+    <color name="aluminum">#999999</color>
+    <color name="base">#AAAAAA</color>
+    <color name="iron">#CCCCCC</color>
+    <color name="facebookbutton">#416BC1</color>
+    <color name="facebookbuttonlight">#a1b6e0</color>
+    <color name="googlebutton">#d43836</color>
+    <color name="googlebuttonlight">#e99d9c</color>
+
+
+</resources>

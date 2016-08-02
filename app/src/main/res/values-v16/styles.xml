@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="RobotoTextViewStyle" parent="android:Widget.TextView">
+        <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:button">@drawable/loginbutton</item>
+        <item name="android:buttonStyle">@drawable/loginbutton</item>
+    </style>
+</resources>
